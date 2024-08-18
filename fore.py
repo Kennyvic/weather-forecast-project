@@ -42,7 +42,7 @@ st.subheader(f"Weather data from {start_date} to {end_date}")
 # Display weather data with pictorial descriptions
 for i, row in filtered_df.iterrows():
     st.write(f"**Date:** {row['Date'].date()}")
-    st.image(icons[row["Weather Condition"]], width=50)
+    # st.image(icons[row["Weather Condition"]], width=50)
     st.write(f"**Rainfall:** {row['Rainfall (mm)']:.2f} mm")
     st.write(f"**Sunshine Hours:** {row['Sunshine Hours']:.2f} hours")
     st.write(f"**Mean Temperature:** {row['Mean Temperature (°C)']:.2f} °C")
