@@ -44,23 +44,14 @@ filtered_df = df[(df["Date"] >= np.datetime64(start_date)) & (df["Date"] <= np.d
 # Round numeric columns to 2 decimal places
 filtered_df[['Rainfall (mm)', 'Sunshine Hours', 'Mean Temperature (°C)', 'Evaporation (mm)']] = filtered_df[['Rainfall (mm)', 'Sunshine Hours', 'Mean Temperature (°C)', 'Evaporation (mm)']].round(2)
 
-# Center the FUNAAB logo
-st.markdown(
-    """
-    <style>
-    .centered-logo {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 10px;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-st.markdown(f'<div class="centered-logo"><img src="data:image/png;base64,{funaab_logo_base64}" width="200"></div>', unsafe_allow_html=True)
+# Position the FUNAAB logo on the left and the title on the right
+col1, col2 = st.columns([1.5, 4])  # Adjusted column widths
 
-# Main title
-st.title("Today's Weather Forecast for FUNAAB Campus")
+with col1:
+    st.image(funaab_logo, width=150)  # Increased the image size
+
+with col2:
+    st.title("Today's Weather Forecast for FUNAAB Campus")
 
 # Display today's date
 current_date = datetime.datetime.now().strftime("%d/%m/%Y")
@@ -69,12 +60,33 @@ st.header(f"Today's date is: {current_date}")
 # Filter the DataFrame for today's data
 today_weather = df[df['Date'] == pd.to_datetime(current_date, format="%d/%m/%Y")]
 
+# Convert icons to Base64
+rainfall_icon_base64 = image_to_base64("C:/Users/Kent/Documents/weather project/icons/black_background/rain_icon.png")
+sunshine_icon_base64 = image_to_base64("C:/Users/Kent/Documents/weather project/icons/black_background/sunshine_icon.jpeg")
+temperature_icon_base64 = image_to_base64("C:/Users/Kent/Documents/weather project/icons/black_background/temp_icon.png")
+evaporation_icon_base64 = image_to_base64("C:/Users/Kent/Documents/weather project/icons/black_background/evap_icon.png")
+
+# Display today's weather data with icons
+st.markdown("### Today's Weather Data")
+
 if not today_weather.empty:
-    st.write(f"**Rainfall:** {today_weather['Rainfall (mm)'].values[0]:.2f} mm")
-    st.write(f"**Sunshine Hours:** {today_weather['Sunshine Hours'].values[0]:.2f} hours")
-    st.write(f"**Mean Temperature:** {today_weather['Mean Temperature (°C)'].values[0]:.2f} °C")
-    st.write(f"**Evaporation:** {today_weather['Evaporation (mm)'].values[0]:.2f} mm")
-    st.write(f"**Weather Condition:** {today_weather['Weather Condition'].values[0]}")
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        st.markdown(f'<img src="data:image/png;base64,{rainfall_icon_base64}" width="50"/>', unsafe_allow_html=True)
+        st.write(f"{today_weather['Rainfall (mm)'].values[0]:.2f} mm")
+    
+    with col2:
+        st.markdown(f'<img src="data:image/png;base64,{sunshine_icon_base64}" width="50"/>', unsafe_allow_html=True)
+        st.write(f"{today_weather['Sunshine Hours'].values[0]:.2f} hours")
+    
+    with col3:
+        st.markdown(f'<img src="data:image/png;base64,{temperature_icon_base64}" width="50"/>', unsafe_allow_html=True)
+        st.write(f"{today_weather['Mean Temperature (°C)'].values[0]:.2f} °C")
+    
+    with col4:
+        st.markdown(f'<img src="data:image/png;base64,{evaporation_icon_base64}" width="50"/>', unsafe_allow_html=True)
+        st.write(f"{today_weather['Evaporation (mm)'].values[0]:.2f} mm")
 else:
     st.write("No weather data available for today.")
 
