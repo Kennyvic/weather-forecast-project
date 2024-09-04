@@ -61,10 +61,10 @@ st.header(f"Today's date is: {current_date}")
 today_weather = df[df['Date'] == pd.to_datetime(current_date, format="%d/%m/%Y")]
 
 # Convert icons to Base64
-rainfall_icon_base64 = image_to_base64("icons\rain_icon.png")
-sunshine_icon_base64 = image_to_base64("icons\sunshine_icon.jpeg")
-temperature_icon_base64 = image_to_base64("icons\temperature_icon.png")
-evaporation_icon_base64 = image_to_base64("icons\evaporation_icon.png")
+rainfall_icon_base64 = image_to_base64("icons/rain_icon.png")
+sunshine_icon_base64 = image_to_base64("icons/sunshine_icon.jpeg")
+temperature_icon_base64 = image_to_base64("icons/temperature_icon.png")
+evaporation_icon_base64 = image_to_base64("icons/evaporation_icon.png")
 
 # Display today's weather data with icons
 st.markdown("### Today's Weather Data")
