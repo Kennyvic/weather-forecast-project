@@ -7,7 +7,7 @@ import uuid
 import datetime
 
 # Load the FUNAAB logo
-funaab_logo = Image.open("C:/Users/Kent/Documents/weather project/funaab logo.png")
+funaab_logo = Image.open("funaab logo.png")
 
 np.random.seed(42)
 
