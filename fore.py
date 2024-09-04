@@ -16,7 +16,7 @@ def image_to_base64(img):
     with open(img, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode()
 
-funaab_logo_base64 = image_to_base64("C:/Users/Kent/Documents/weather project/funaab logo.png")
+funaab_logo_base64 = image_to_base64("funaab logo.png")
 
 # Generate some dummy weather data for the next 10 years
 date_range = pd.date_range(start="2024-01-01", end="2034-01-01", freq='D')
